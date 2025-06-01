@@ -1,0 +1,31 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Number Guessing Game</h1>
+    <p>Guess the number between 1 and 100</p>
+
+    {% if message %}
+      <div class="message {{ status }}">{{ message }}</div>
+    {% endif %}
+
+    {% if game_over %}
+      <form method="post" action="/reset">
+        <button type="submit" class="btn">Play Again 🔁</button>
+      </form>
+    {% else %}
+      <form method="post">
+        <input type="number" name="guess" placeholder="Enter your guess" required>
+        <button type="submit" class="btn">Guess</button>
+      </form>
+      <p>Attempts Left: {{ attempts_left }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
